@@ -6,7 +6,7 @@ orbs:
   # used by aws-ecr Orb.
   # If so, the `which aws` would reveal it is 
   # installed in /tmp
-  aws-cli: circleci/aws-cli@2.0.6
+  # aws-cli: circleci/aws-cli@2.0.6
 
 jobs:
   login-ecr:
