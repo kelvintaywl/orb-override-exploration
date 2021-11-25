@@ -1,17 +1,25 @@
 version: 2.1
 
+orbs:
+  aws-ecr: circleci/aws-ecr@7.3.0
+  # Hypothesis: this will override the aws-cli Orb version
+  # used by aws-ecr Orb.
+  # If so, the `which aws` would reveal it is 
+  # installed in /tmp
+  aws-cli: circleci/aws-cli@2.0.6
+
 jobs:
-  echo:
+  login-ecr:
     docker:
       - image: cimg/base:stable
     steps:
+      - aws-ecr/ecr-login
       - run:
-          name: Greet
-          command: echo "I love ${COLOR} builds."
-          environment:
-            COLOR: "green"
+          name: Check AWS CLI
+          command: |
+            which aws
 
 workflows:
-  main:
+  exploration:
     jobs:
-      - echo
+      - login-ecr
